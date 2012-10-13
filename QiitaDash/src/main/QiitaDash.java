@@ -11,20 +11,22 @@ import searcher.Requester;
 
 public class QiitaDash {
 	public static void main(String[] args) throws IOException {
-		// String response = Requester.getSearchResult("Dash");
 		String response = Requester.getTagSearchResult("Dash");
+		// String response = Requester.getTagSearchResult("Dash");
 		
-		int maxItemNumber = 1;
+		int maxItemNumber = 3;
 		List<CodeSnippet> snippets 
 			= JSONResponseParser.getCodeSnippetFromSearchResult(response, maxItemNumber);
 		
 		DashUtil dash = new DashUtil();
 		dash.open("dash");
 		
+		// System.out.println(snippets.toString());
 		for (CodeSnippet snippet: snippets) {
 			dash.createNewSnippet(snippet.getTitle(), snippet.getBody(), snippet.getTags());
 		}
 		
+		System.out.println("Program end");
 		//qd.testKeys();
 	}
 	

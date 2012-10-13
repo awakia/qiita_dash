@@ -12,7 +12,7 @@ public class KeyUtil {
 	public KeyUtil() {
 		try {
 			rb = new Robot();
-			rb.setAutoDelay(10);
+			rb.setAutoDelay(30);
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}

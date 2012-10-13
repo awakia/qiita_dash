@@ -17,12 +17,9 @@ public class JSONResponseParser {
 			IOException {
 		JsonNode itemArray = new ObjectMapper().readTree(response);
 		List<CodeSnippet> codeSnippets = new ArrayList<CodeSnippet>();
-		int itemIndex = 0;
 		for (Iterator<JsonNode> iterator = itemArray.iterator(); iterator
 				.hasNext();) {
-			itemIndex++;
-			if (itemIndex > threshold)
-				break;
+			if (codeSnippets.size() >= threshold) break;
 			JsonNode node = iterator.next();
 			String uuid = node.get("uuid").textValue();
 
@@ -45,7 +42,10 @@ public class JSONResponseParser {
 					System.err.println("cannot get title");
 					body = splitedCodeBody[0];
 				} else {
-					title = splitedCodeBody[0];
+					title = splitedCodeBody[0].trim();
+					if (title.equals("")) {
+						title = "no_name";
+					}
 					body = splitedCodeBody[1];
 				}
 				CodeSnippet snippet = new CodeSnippet(title,

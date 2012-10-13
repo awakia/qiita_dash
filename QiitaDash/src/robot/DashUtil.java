@@ -28,5 +28,6 @@ public class DashUtil extends KeyUtil {
 		inputString(tags);
 		delay();
 		keyPress(KeyEvent.VK_META, KeyEvent.VK_S);
+		delay();
 	}
 }
