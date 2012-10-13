@@ -4,3 +4,8 @@
 *.jar
 *.war
 *.ear
+
+# Commonly Unnecessary Files"
+*.swp
+*~
+.DS_Store
