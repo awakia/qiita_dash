@@ -42,7 +42,7 @@ public class KeyUtil {
 	public void inputString(String sequence) {
 		int idx = -1;
 		for (int c: sequence.toCharArray()) {
-			if (c < ' ' || '~' < c) continue;
+			// if (c < ' ' || '~' < c) continue;
 			if ('a' <= c && c <= 'z') {
 				keyPress(Character.toUpperCase(c));
 			} else if (('A' <= c && c <= 'Z') ) {

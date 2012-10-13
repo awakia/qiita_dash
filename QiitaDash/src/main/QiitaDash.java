@@ -18,39 +18,15 @@ public class QiitaDash {
 		int maxItemNumber = 1;
 		List<CodeSnippet> snippets 
 			= JSONResponseParser.getCodeSnippetFromSearchResult(response, maxItemNumber);
+		
+		DashUtil dash = new DashUtil();
+		dash.open("dash");
+		
 		for (CodeSnippet snippet: snippets) {
-			QiitaDash qd = new QiitaDash();
-			qd.createNewSnippet(snippet.getTitle(), snippet.getBody(), snippet.getTags());
+			dash.createNewSnippet(snippet.getTitle(), snippet.getBody(), snippet.getTags());
 		}
 		
-		//qd.test();
 		//qd.testKeys();
-	}
-	
-	void createNewSnippet(String abbr, String content, String tags) {
-		DashUtil dash = new DashUtilMock();
-		dash.open("dash");
-		dash.createNewSnippet(abbr, content, tags);
-	}
-	
-	void test() {
-//		System.out.println(KeyEvent.VK_A);
-//		System.out.println((int)'a');
-//		System.out.println(KeyEvent.VK_PLUS);
-//		System.out.println((int)'+');
-//		System.out.println(KeyEvent.VK_PERIOD);
-//		System.out.println((int)'.');
-//		System.out.println(KeyEvent.VK_SPACE);
-//		System.out.println((int)' ');
-//		System.out.println(KeyEvent.VK_ENTER);
-//		System.out.println((int)'\n');
-//		System.out.println(KeyEvent.VK_QUOTE);
-//		System.out.println((int)'\'');
-//		System.out.println(KeyEvent.VK_QUOTEDBL);
-//		System.out.println((int)'"');
-		System.out.println(KeyEvent.VK_BACK_QUOTE);
-		System.out.println((int)'`');
-		System.out.println((int)'~');
 	}
 	
 	void testKeys() {
