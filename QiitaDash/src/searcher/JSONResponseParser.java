@@ -36,7 +36,7 @@ public class JSONResponseParser {
 					tagsList.append(' ');
 			}
 
-			String title = "no_name#";
+			String title = "no_name";
 			String body = "";
 			String codeBody = getCodeBody(uuid);
 			if (codeBody != null) {

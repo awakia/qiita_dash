@@ -67,7 +67,7 @@ public class KeyUtil {
 		for (int key : keys) {
 			rb.keyPress(key);
 		}
-		rb.delay(50);
+		rb.delay(10);
 		for (int key : keys) {
 			rb.keyRelease(key);
 		}

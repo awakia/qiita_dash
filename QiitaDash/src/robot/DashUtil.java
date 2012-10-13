@@ -6,11 +6,12 @@ import java.awt.event.KeyEvent;
 public class DashUtil extends KeyUtil {
 	/**
 	 * 
-	 * @param abbr Abbriviation for dash snippet command
+	 * @param abbr Abbreviation for dash snippet command
 	 * @param content Content of dash snippet
 	 * @param tags tags separated by space(' ')
 	 */
 	public void createNewSnippet(String abbr, String content, String tags) {
+		abbr += "#";
 		keyPress(KeyEvent.VK_META, KeyEvent.VK_N);
 		delay();
 		inputString(abbr);
