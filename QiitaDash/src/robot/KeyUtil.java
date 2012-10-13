@@ -1,6 +1,9 @@
 package robot;
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
 
@@ -71,6 +74,13 @@ public class KeyUtil {
 		for (int key : keys) {
 			rb.keyRelease(key);
 		}
+	}
+	
+	public void copyToClipboard(String string) {
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Clipboard clip = kit.getSystemClipboard();
+	    StringSelection ss = new StringSelection(string);
+	    clip.setContents(ss, ss);
 	}
 	
 	public void delay() {

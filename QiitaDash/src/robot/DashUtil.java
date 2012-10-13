@@ -18,7 +18,8 @@ public class DashUtil extends KeyUtil {
 		delay();
 		keyPress(KeyEvent.VK_TAB);
 		delay();
-		inputString(content);
+		copyToClipboard(content);
+		keyPress(KeyEvent.VK_META, KeyEvent.VK_V);
 		delay();
 		keyPress(KeyEvent.VK_META, KeyEvent.VK_L);
 		delay();
