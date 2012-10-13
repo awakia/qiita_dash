@@ -36,10 +36,14 @@ public class JSONResponseParser {
 			
 			String codeBody = getCodeBody(uuid);
 			if (codeBody != null) {
-			
-				CodeSnippet snippet = new CodeSnippet(node.get("title").textValue(),
-						codeBody, tagsList.toString());
-				codeSnippets.add(snippet);
+				String[] splitedCodeBody = codeBody.split("\\n", 2);
+				if (splitedCodeBody.length < 2) {
+					System.out.println("cannot get title");
+				} else {
+					CodeSnippet snippet = new CodeSnippet(splitedCodeBody[0],
+							splitedCodeBody[1], tagsList.toString());
+					codeSnippets.add(snippet);
+				}
 			}
 		}
 		return codeSnippets;
