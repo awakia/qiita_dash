@@ -4,6 +4,7 @@
 *.jar
 *.war
 *.ear
+*.prefs
 
 # Commonly Unnecessary Files"
 *.swp
