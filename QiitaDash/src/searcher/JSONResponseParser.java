@@ -58,7 +58,7 @@ public class JSONResponseParser {
 
 	public static String getCodeBody(String uuid)
 			throws JsonProcessingException, IOException {
-		String itemDetailsStr = Requester.getItem(uuid);
+		String itemDetailsStr = Searcher.getItem(uuid);
 		JsonNode itemDetails = new ObjectMapper().readTree(itemDetailsStr);
 		String codeBody = itemDetails.get("raw_body").textValue();
 		Pattern pattern = Pattern.compile("```([^`]+)```");

@@ -4,21 +4,22 @@ import java.io.IOException;
 import java.util.List;
 
 import robot.DashUtil;
+import robot.DashUtilMock;
 import robot.KeyUtil;
 import searcher.CodeSnippet;
 import searcher.JSONResponseParser;
-import searcher.Requester;
+import searcher.Searcher;
 
 public class QiitaDash {
 	public static void main(String[] args) throws IOException {
-		String response = Requester.getTagSearchResult("Dash");
+		String response = Searcher.getTagSearchResult("Dash");
 		// String response = Requester.getTagSearchResult("Dash");
 		
 		int maxItemNumber = 3;
 		List<CodeSnippet> snippets 
 			= JSONResponseParser.getCodeSnippetFromSearchResult(response, maxItemNumber);
 		
-		DashUtil dash = new DashUtil();
+		DashUtil dash = new DashUtilMock();
 		dash.open("dash");
 		
 		// System.out.println(snippets.toString());
