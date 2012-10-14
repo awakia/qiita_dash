@@ -19,13 +19,13 @@ public class Requester {
 		urlConnection.setInstanceFollowRedirects(false);
 
 		StringBuilder paramterBuilder = new StringBuilder();
-		boolean flag = false;
+		boolean isFirstElement = true;
 		if (paramters != null) {
 			urlConnection.setDoOutput(true);
 			for (String key : paramters.keySet()) {
-				if (flag)
+				if (!isFirstElement)
 					paramterBuilder.append("&");
-				flag = true;
+				isFirstElement = false;
 				paramterBuilder.append(key);
 				paramterBuilder.append("=");
 				paramterBuilder.append(paramters.get(key));
