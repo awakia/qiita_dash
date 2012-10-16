@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JSONResponseParser {
 	public static List<CodeSnippet> getCodeSnippetFromSearchResult(
-			String response, int threshold) throws JsonProcessingException,
+			String response, int threshold, ResultFilter filter) throws JsonProcessingException,
 			IOException {
 		JsonNode itemArray = new ObjectMapper().readTree(response);
 		List<CodeSnippet> codeSnippets = new ArrayList<CodeSnippet>();
@@ -21,6 +21,9 @@ public class JSONResponseParser {
 				.hasNext();) {
 			if (codeSnippets.size() >= threshold) break;
 			JsonNode node = iterator.next();
+			if (filter != null && !filter.match(node))
+				continue;
+			
 			String uuid = node.get("uuid").textValue();
 
 			JsonNode tagsJson = node.get("tags");

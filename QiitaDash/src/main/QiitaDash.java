@@ -8,10 +8,12 @@ import robot.KeyUtil;
 import searcher.CodeSnippet;
 import searcher.JSONResponseParser;
 import searcher.Requester;
+import searcher.ResultFilter;
+import searcher.TagFilter;
 
 public class QiitaDash {
 	private static int itemNumberLimit = 10;
-	private static String addtionalTag;
+	private static String additionalTag;
 	
 	public static void main(String[] args) throws IOException {
 		if (!parseArgs(args))
@@ -20,8 +22,12 @@ public class QiitaDash {
 		String response = Requester.getTagSearchResult("Dash");
 		// String response = Requester.getTagSearchResult("Dash");
 		
+		ResultFilter filter = null;
+		if (additionalTag != null)
+			filter = new TagFilter(additionalTag);
+		
 		List<CodeSnippet> snippets 
-			= JSONResponseParser.getCodeSnippetFromSearchResult(response, itemNumberLimit);
+			= JSONResponseParser.getCodeSnippetFromSearchResult(response, itemNumberLimit, filter);
 		
 		DashUtil dash = new DashUtil();
 		dash.open("dash");
@@ -50,7 +56,7 @@ public class QiitaDash {
 					return false;
 				}
 			} else if ("-t".equals(args[i])) {
-				addtionalTag = args[++i];
+				additionalTag = args[++i];
 			} else {
 				System.err.println("'" + args[i] + 
 						"' is unknown option or parameter: Ignored.");
