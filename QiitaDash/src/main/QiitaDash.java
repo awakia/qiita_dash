@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.util.List;
 
 import robot.DashUtil;
-import robot.DashUtilMock;
 import robot.KeyUtil;
 import searcher.CodeSnippet;
-import searcher.JSONResponseParser;
+import searcher.SearchResultParser;
 import searcher.Searcher;
 
 public class QiitaDash {
@@ -17,9 +16,9 @@ public class QiitaDash {
 		
 		int maxItemNumber = 3;
 		List<CodeSnippet> snippets 
-			= JSONResponseParser.getCodeSnippetFromSearchResult(response, maxItemNumber);
+			= SearchResultParser.getCodeSnippetFromSearchResult(response, maxItemNumber);
 		
-		DashUtil dash = new DashUtilMock();
+		DashUtil dash = new DashUtil();
 		dash.open("dash");
 		
 		// System.out.println(snippets.toString());
