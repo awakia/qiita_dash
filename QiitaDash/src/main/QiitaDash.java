@@ -6,10 +6,10 @@ import java.util.List;
 import robot.DashUtil;
 import robot.KeyUtil;
 import searcher.CodeSnippet;
-import searcher.JSONResponseParser;
-import searcher.Requester;
 import searcher.ResultFilter;
 import searcher.TagFilter;
+import searcher.SearchResultParser;
+import searcher.Searcher;
 
 public class QiitaDash {
 	private static int itemNumberLimit = 10;
@@ -19,15 +19,14 @@ public class QiitaDash {
 		if (!parseArgs(args))
 			return;
 		
-		String response = Requester.getTagSearchResult("Dash");
-		// String response = Requester.getTagSearchResult("Dash");
+		String response = Searcher.getTagSearchResult("Dash");
 		
 		ResultFilter filter = null;
 		if (additionalTag != null)
 			filter = new TagFilter(additionalTag);
 		
 		List<CodeSnippet> snippets 
-			= JSONResponseParser.getCodeSnippetFromSearchResult(response, itemNumberLimit, filter);
+			= SearchResultParser.getCodeSnippetFromSearchResult(response, itemNumberLimit, filter);
 		
 		DashUtil dash = new DashUtil();
 		dash.open("dash");
