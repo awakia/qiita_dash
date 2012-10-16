@@ -31,7 +31,10 @@ public class JSONResponseParser {
 			for (Iterator<JsonNode> tagsIterator = tagsJson.iterator(); tagsIterator
 					.hasNext();) {
 				JsonNode tagNode = tagsIterator.next();
-				tagsList.append(tagNode.get("name").textValue());
+				String tag = tagNode.get("name").textValue();
+				if (tag.toLowerCase().equals("dash"))
+					continue;
+				tagsList.append(tag);
 				if (tagsIterator.hasNext())
 					tagsList.append(' ');
 			}
