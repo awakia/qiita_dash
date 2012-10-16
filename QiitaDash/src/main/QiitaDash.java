@@ -10,13 +10,18 @@ import searcher.JSONResponseParser;
 import searcher.Requester;
 
 public class QiitaDash {
+	private static int itemNumberLimit = 10;
+	private static String addtionalTag;
+	
 	public static void main(String[] args) throws IOException {
+		if (!parseArgs(args))
+			return;
+		
 		String response = Requester.getTagSearchResult("Dash");
 		// String response = Requester.getTagSearchResult("Dash");
 		
-		int maxItemNumber = 3;
 		List<CodeSnippet> snippets 
-			= JSONResponseParser.getCodeSnippetFromSearchResult(response, maxItemNumber);
+			= JSONResponseParser.getCodeSnippetFromSearchResult(response, itemNumberLimit);
 		
 		DashUtil dash = new DashUtil();
 		dash.open("dash");
@@ -28,6 +33,30 @@ public class QiitaDash {
 		
 		System.out.println("Program end");
 		//qd.testKeys();
+	}
+	
+	private static boolean parseArgs(String[] args) {
+		if (args.length > 0 && "-h".equals(args[0])) {
+			System.out.println("QiitaDash [-n limitOfItemNumber] [-t tagToFilterSearchResult]");
+			return false;
+		}
+		
+		for (int i = 0; i < args.length; i++) {
+			if ("-n".equals(args[i])) {
+				try {
+					itemNumberLimit = Integer.parseInt(args[++i]);
+				} catch (NumberFormatException e) {
+					System.err.println("item number limit must be integer.");
+					return false;
+				}
+			} else if ("-t".equals(args[i])) {
+				addtionalTag = args[++i];
+			} else {
+				System.err.println("'" + args[i] + 
+						"' is unknown option or parameter: Ignored.");
+			}
+		}
+		return true;
 	}
 	
 	void testKeys() {
