@@ -28,7 +28,7 @@ public class SearchResultParser {
 			ItemDetail itemDetail = ItemDetail.requestBy(uuid);
 			if (itemDetail.getCodeBody() != null) {
 				CodeSnippet snippet = new CodeSnippet(itemDetail.getCodeTitle(),
-						itemDetail.getCodeBody(), tags);
+						itemDetail.getCodeBody(), tags + " Qiita");
 				codeSnippets.add(snippet);
 			}
 		}
