@@ -14,6 +14,7 @@ import searcher.Searcher;
 public class QiitaDash {
 	private static int itemNumberLimit = 10;
 	private static String additionalTag;
+	private static boolean japaneseKeyboard = false;
 	
 	public static void main(String[] args) throws IOException {
 		if (!parseArgs(args))
@@ -28,7 +29,7 @@ public class QiitaDash {
 		List<CodeSnippet> snippets 
 			= SearchResultParser.getCodeSnippetFromSearchResult(response, itemNumberLimit, filter);
 		
-		DashUtil dash = new DashUtil();
+		DashUtil dash = new DashUtil(japaneseKeyboard);
 		dash.open("dash");
 		
 		// System.out.println(snippets.toString());
@@ -41,8 +42,9 @@ public class QiitaDash {
 	}
 	
 	private static boolean parseArgs(String[] args) {
-		if (args.length > 0 && "-h".equals(args[0])) {
-			System.out.println("QiitaDash [-n limitOfItemNumber] [-t tagToFilterSearchResult]");
+		if (args.length > 0 && ("-h".equals(args[0]) || "--help".equals(args[0]))) {
+			System.out.println("usage: java -jar QiitaDash.jar"
+					+"[-n limitOfItemNumber] [-t tagToFilterSearchResult] [-j|--japanese]");
 			return false;
 		}
 		
@@ -56,6 +58,8 @@ public class QiitaDash {
 				}
 			} else if ("-t".equals(args[i])) {
 				additionalTag = args[++i];
+			} else if ("--japanese".equals(args[i]) || "-j".equals(args[i])) {
+				japaneseKeyboard = true;
 			} else {
 				System.err.println("'" + args[i] + 
 						"' is unknown option or parameter: Ignored.");

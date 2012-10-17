@@ -4,6 +4,10 @@ import java.awt.event.KeyEvent;
 
 
 public class DashUtil extends KeyUtil {
+	public DashUtil(boolean japaneseKeyboard) {
+		super(japaneseKeyboard);
+	}
+
 	/**
 	 * 
 	 * @param abbr Abbreviation for dash snippet command
